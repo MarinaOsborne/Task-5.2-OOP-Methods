@@ -13,6 +13,22 @@ export class Character {
       throw new Error('Введите корректное значение');
     }
   }
+
+  levelUp() {
+    if (this.health === 0) {
+      throw new Error('Произошла ошибка');
+    } else {
+      this.health = 100;
+      this.level += 1;
+      this.attack *= 1.2;
+      this.defence *= 1.2;
+    }
+  }
+
+  damage(points) {
+    points * (1 - this.defence / 100) - this.health > 0
+      ? this.health = 0 : this.health -= points * (1 - this.defence / 100);
+  }
 }
 
 export class Bowman extends Character {

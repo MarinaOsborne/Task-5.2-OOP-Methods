@@ -90,3 +90,50 @@ test('проверка Bowman', () => {
   const received = new Bowman('Петя', 'Bowman', 30, 20);
   expect(received.attack).toEqual(25);
 });
+
+test('проверка данных levelup', () => {
+  const received = new Bowman('Петя', 'Bowman', 30, 20);
+  received.levelUp();
+  expect(received).toEqual({
+    attack: 30,
+    defence: 30,
+    health: 100,
+    level: 2,
+    name: 'Петя',
+    type: 'Bowman',
+  });
+});
+
+test('проверка на ошибку levelup', () => {
+  const received = new Bowman('Петя', 'Bowman', 30, 20);
+  received.health = 0;
+  expect(() => {
+    received.levelUp();
+  }).toThrow();
+});
+
+test('проверка damage', () => {
+  const received = new Bowman('Петя', 'Bowman', 30, 20);
+  received.damage(200);
+  expect(received).toEqual({
+    attack: 25,
+    defence: 25,
+    health: 0,
+    level: 1,
+    name: 'Петя',
+    type: 'Bowman',
+  });
+});
+
+test('проверка damage', () => {
+  const received = new Bowman('Петя', 'Bowman', 30, 20);
+  received.damage(20);
+  expect(received).toEqual({
+    attack: 25,
+    defence: 25,
+    health: 85,
+    level: 1,
+    name: 'Петя',
+    type: 'Bowman',
+  });
+});
